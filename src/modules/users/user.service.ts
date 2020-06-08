@@ -80,26 +80,4 @@ export class UserService {
 
     return this.usersRepository.save(user);
   }
-
-  async findById(id: number): Promise<User> {
-    const user = this.usersRepository.findOne(id);
-
-    if (!user) {
-      throw new BadRequestException('User not found.');
-    }
-
-    return user;
-  }
-
-  async findByUserName(username: string): Promise<User> {
-    const user = this.usersRepository.findOne({
-      where: { username },
-    });
-
-    if (!user) {
-      throw new BadRequestException('User not found.');
-    }
-
-    return user;
-  }
 }
