@@ -4,9 +4,10 @@ import { UserModule } from 'modules/users/user.module';
 import { TournamentModule } from 'modules/tournaments/tournament.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, TournamentModule],
+  imports: [DatabaseModule, UserModule, TournamentModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

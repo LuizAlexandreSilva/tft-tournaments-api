@@ -80,4 +80,10 @@ export class UserService {
 
     return this.usersRepository.save(user);
   }
+
+  async findByUsername(username: string): Promise<User | undefined> {
+    return await this.usersRepository.findOne({
+      where: { username },
+    });
+  }
 }
