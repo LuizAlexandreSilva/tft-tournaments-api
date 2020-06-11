@@ -1,13 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { TournamentService } from './tournament.service';
 import { Tournament } from './entities/tournament.entity';
+import { CreateTournamentDTO } from './dtos/CreateTournamentDTO';
 
 @Controller('/tournaments')
 export class TournamentController {
   constructor(private readonly tournamentService: TournamentService) { }
 
-  @Get()
-  async index(): Promise<Tournament[]> {
-    return this.tournamentService.findAll();
+  @Post('/create')
+  async create(
+    @Body() createTournamentDTO: CreateTournamentDTO
+  ): Promise<Tournament> {
+    return this.tournamentService.create(createTournamentDTO);
   }
 }

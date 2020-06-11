@@ -4,7 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
+import { TournamentOrganizer } from './tournament-organizer.entity';
+import User from 'modules/users/entities/user.entity';
 
 @Entity('tournaments')
 export class Tournament {
@@ -19,6 +24,12 @@ export class Tournament {
 
   @Column('integer', { name: 'num_players' })
   numPlayers: number;
+
+  @OneToMany(() => TournamentOrganizer, tournamentOrganizer => tournamentOrganizer.tournament, {
+    cascade: ['insert'],
+    eager: true,
+  })
+  tournamentOrganizers: TournamentOrganizer[];
 
   @Column({ name: 'first_place' })
   firstPlace: string;

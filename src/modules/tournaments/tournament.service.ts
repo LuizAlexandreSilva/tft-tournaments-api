@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tournament } from './entities/tournament.entity';
+import { CreateTournamentDTO } from './dtos/CreateTournamentDTO';
 
 @Injectable()
 export class TournamentService {
@@ -10,13 +11,18 @@ export class TournamentService {
     private readonly tournamentRepository: Repository<Tournament>,
   ) { }
 
-  async findAll(): Promise<Tournament[]> {
+  async create(createTournamentDTO: CreateTournamentDTO): Promise<Tournament> {
+    const { name, description, numPlayers, organizers } = createTournamentDTO;
+
     const tournament = this.tournamentRepository.create({
-      name: 'Thornmail Tactics',
-      numPlayers: 44,
+      name,
+      description,
+      numPlayers,
+      tournamentOrganizers: organizers,
     });
 
-    const t = await this.tournamentRepository.save(tournament);
-    return [t];
+    await this.tournamentRepository.save(tournament);
+
+    return tournament;
   }
 }

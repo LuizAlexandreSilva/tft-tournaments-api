@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { TournamentOrganizer } from 'modules/tournaments/entities/tournament-organizer.entity';
 
 @Entity('users')
 class User {
@@ -22,6 +24,9 @@ class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => TournamentOrganizer, tournamentOrganizer => tournamentOrganizer.user)
+  tournamentOrganizers: TournamentOrganizer[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

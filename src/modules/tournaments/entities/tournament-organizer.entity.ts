@@ -18,12 +18,13 @@ export class TournamentOrganizer {
   tournamentId: string;
 
   @Column({ name: 'user_id' })
-  userId: string;
+  userId: number;
 
   @ManyToOne(() => Tournament, tournament => tournament.id)
   @JoinColumn({ name: 'tournament_id' })
   tournament: Tournament;
 
-  @ManyToMany(() => User, user => user.id)
-  user: User[];
+  @ManyToOne(() => User, user => user)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }
