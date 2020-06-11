@@ -5,11 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { TournamentOrganizer } from './tournament-organizer.entity';
-import User from 'modules/users/entities/user.entity';
 
 @Entity('tournaments')
 export class Tournament {
